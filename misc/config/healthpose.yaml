@@ -1,0 +1,69 @@
+http:
+  listen: :8080
+
+services:
+  test:
+    name: example
+    version: v1.0
+    checks:
+#      - name: cassandra
+#        timeout: 60
+#        optional: true
+#        cassandra:
+#          hosts:
+#            - host1.example.com
+#            - host2.example.com
+#          keyspace: ""
+      - name: dns
+        optional: true
+        dns:
+          address: example.com
+          server: 8.8.8.8
+          type: a
+          request_timeout: 5
+          fallback_delay: 0.3
+#      - name: grpc
+#        optional: true
+#        grpc:
+      - name: http-call
+        http:
+          url: https://example.com/
+          request_timeout: 0
+      - name: icmp-ping
+        icmp:
+          address: example.com
+          count: 1
+          interval: 1
+          request_timeout: 5
+#      - name: influxdb
+#        influxdb:
+#          dsn: ""
+#      - name: memcached
+#        memcached:
+#          dsn: ""
+#      - name: mongo
+#        mongo:
+#          dsn: ""
+#          timeout_connect: 0
+#          timeout_disconnect: 0
+#          timeout_ping: 0
+#      - name: mysql
+#        mysql:
+#          dsn: ""
+#      - name: nats
+#        nats:
+#          dsn: ""
+#      - name: postgres
+#        postgres:
+#          dsn: ""
+#      - name:
+#        rabbitmq:
+#          dsn: ""
+#          exchange: ""
+#          routing_key: ""
+#          queue: ""
+#          consume_timeout: 0
+#          dial_timeout: 0
+#      - name:
+#        redis:
+#          dsn: ""
