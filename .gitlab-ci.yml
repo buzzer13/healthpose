@@ -12,24 +12,9 @@ before_script:
 - docker login --username gitlab-ci-token --password "$CI_JOB_TOKEN" "$CI_REGISTRY"
 
 variables:
-  APP_CURRENT_IMAGE: "$CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHORT_SHA"
-  APP_LATEST_IMAGE: "$CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:latest"
-  BUILDER_NAME: docker-buildx
-  BUILDER_IMAGE: "$CI_REGISTRY_IMAGE/$BUILDER_NAME:latest"
+  APP_CURRENT_IMAGE: "$CI_REGISTRY_IMAGE:$CI_COMMIT_TAG"
+  APP_LATEST_IMAGE: "$CI_REGISTRY_IMAGE:latest"
   PLATFORMS: "linux/arm/v7,linux/arm64/v8,linux/amd64"
-
-build-app:
-  stage: build
-  script:
-  - docker pull "$APP_LATEST_IMAGE" || true
-  - docker build --file "Containerfile" --build-arg "REF=$CI_COMMIT_REF_SLUG" --build-arg "SHA=$CI_COMMIT_SHORT_SHA" --tag "$APP_CURRENT_IMAGE" --tag "$APP_LATEST_IMAGE" .
-  - docker push "$APP_CURRENT_IMAGE"
-  - docker push "$APP_LATEST_IMAGE"
-  rules:
-  - if: '$CI_COMMIT_TAG =~ /^v/ && ($PLATFORMS == null || $PLATFORMS == "")'
-    when: on_success
-    exists:
-    - Containerfile
 
 buildx-app:
   stage: build
@@ -38,7 +23,7 @@ buildx-app:
   - docker buildx create --use
   - docker buildx build --push --platform "$PLATFORMS" --file "Containerfile" --build-arg "REF=$CI_COMMIT_REF_SLUG" --build-arg "SHA=$CI_COMMIT_SHORT_SHA" --tag "$APP_CURRENT_IMAGE" --tag "$APP_LATEST_IMAGE" .
   rules:
-  - if: '$CI_COMMIT_TAG =~ /^v/ && $PLATFORMS'
+  - if: '$CI_COMMIT_TAG =~ /^v/'
     when: on_success
     exists:
     - Containerfile

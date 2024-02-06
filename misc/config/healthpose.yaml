@@ -15,10 +15,9 @@ services:
 #            - host2.example.com
 #          keyspace: ""
       - name: dns
-        optional: true
         dns:
           address: example.com
-          server: 8.8.8.8
+          server: 8.8.8.8:53
           type: a
           request_timeout: 5
           fallback_delay: 0.3
@@ -30,6 +29,7 @@ services:
           url: https://example.com/
           request_timeout: 0
       - name: icmp-ping
+        optional: true
         icmp:
           address: example.com
           count: 1

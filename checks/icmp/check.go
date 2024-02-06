@@ -39,6 +39,7 @@ func New(config Config) func(ctx context.Context) error {
 
 		pinger.Count = config.Count
 		pinger.Interval = config.Interval
+
 		err = pinger.RunWithContext(ctx)
 
 		if err != nil {
