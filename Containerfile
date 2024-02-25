@@ -6,7 +6,7 @@ COPY go.mod go.sum /app/
 RUN go mod download
 
 COPY . /app/
-RUN CGO_ENABLED=0 GOOS=linux go build -o healthpose healthpose.go types.go
+RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-s -w" -o healthpose healthpose.go types.go
 
 FROM docker.io/library/alpine:3.19
 

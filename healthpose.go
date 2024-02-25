@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 	"github.com/hellofresh/health-go/v5"
-	checkCassandra "github.com/hellofresh/health-go/v5/checks/cassandra"
 	"os"
 	"time"
 
+	checkCassandra "github.com/hellofresh/health-go/v5/checks/cassandra"
 	//checkGRPC "github.com/hellofresh/health-go/v5/checks/grpc"
 	checkHTTP "github.com/hellofresh/health-go/v5/checks/http"
 	checkInfluxDB "github.com/hellofresh/health-go/v5/checks/influxdb"

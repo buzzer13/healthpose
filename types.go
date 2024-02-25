@@ -82,7 +82,7 @@ type ServiceCheck struct {
 	SkipOnErr bool            `koanf:"optional"`
 	Cassandra *CheckCassandra `koanf:"cassandra,omitempty"`
 	DNS       *CheckDNS       `koanf:"dns,omitempty"`
-	//GRPC      *ConfigServiceCheckGRPC      `koanf:"grpc,omitempty"`
+	//GRPC      *CheckGRPC      `koanf:"grpc,omitempty"`
 	HTTP      *CheckHTTP      `koanf:"http,omitempty"`
 	ICMP      *CheckICMP      `koanf:"icmp,omitempty"`
 	InfluxDB  *CheckInfluxDB  `koanf:"influxdb,omitempty"`
