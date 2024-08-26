@@ -1,5 +1,7 @@
 # Healthpose
 
+[![latest release](https://gitlab.com/buzzer13/healthpose/-/badges/release.svg)](https://gitlab.com/buzzer13/healthpose/-/releases)
+
 This project provides an HTTP server that performs health checks to the specified services and exposes HTTP endpoints to get status of configured health checks. Main use-cases of this project are:
 
 - Exposing HTTP health check endpoints for services that don't have a native HTTP health check API (i.e. databases or containers).
@@ -23,8 +25,8 @@ This project provides an HTTP server that performs health checks to the specifie
 ## Container
 
 1. Pull and run `registry.gitlab.com/buzzer13/healthpose:<tag>` image (tag can be either `latest`, or a specific version like `v1.0.1`).
-    1. `docker run --volume="healthpose-config:/config" --name=healthpose -it "registry.gitlab.com/buzzer13/healthpose:latest"`
-    2. To use ping health check with runtimes other than Docker engine - you may need to apply `net.ipv4.ping_group_range=0 2147483647` sysctl variable to the container.
+    - Command: `docker run --volume="healthpose-config:/config" --name=healthpose -it "registry.gitlab.com/buzzer13/healthpose:latest"`
+    - To use ping health check with runtimes other than Docker engine - you may need to apply `net.ipv4.ping_group_range=0 2147483647` sysctl variable to the container.
 2. Update an example [configuration file](#configuration) that was created in the volume.
 
 # Configuration
@@ -63,7 +65,7 @@ services:
         # Optional. If check is marked as optional - it won't fail health check of the whole service.
         optional: true
         # Required. One of the available health check configuration dictionaries.
-        # Examples can be found here: https://gitlab.com/buzzer13/healthpose/-/blob/master/misc/config/healthpose.yaml
+        # Examples can be found here: https://gitlab.com/buzzer13/healthpose/-/blob/main/misc/config/healthpose.yaml
         dns:
           address: example.com
           server: 8.8.8.8:53
