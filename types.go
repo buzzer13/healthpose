@@ -1,7 +1,7 @@
 package main
 
 import (
-	"gitlab.com/buzzer13/healthpose/checks/dns"
+	"github.com/buzzer13/healthpose/checks/dns"
 )
 
 type CheckCassandra struct {

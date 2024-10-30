@@ -3,11 +3,20 @@ package main
 import (
 	"fmt"
 	"github.com/hellofresh/health-go/v5"
+	"github.com/knadh/koanf/parsers/yaml"
+	"github.com/knadh/koanf/providers/env"
+	"github.com/knadh/koanf/providers/file"
+	"github.com/knadh/koanf/providers/structs"
+	"github.com/knadh/koanf/v2"
+	"log"
+	"net/http"
 	"os"
 	"time"
 
 	checkCassandra "github.com/hellofresh/health-go/v5/checks/cassandra"
 	//checkGRPC "github.com/hellofresh/health-go/v5/checks/grpc"
+	checkDNS "github.com/buzzer13/healthpose/checks/dns"
+	checkICMP "github.com/buzzer13/healthpose/checks/icmp"
 	checkHTTP "github.com/hellofresh/health-go/v5/checks/http"
 	checkInfluxDB "github.com/hellofresh/health-go/v5/checks/influxdb"
 	checkMemcached "github.com/hellofresh/health-go/v5/checks/memcached"
@@ -17,15 +26,6 @@ import (
 	checkPostgres "github.com/hellofresh/health-go/v5/checks/postgres"
 	checkRabbitMQ "github.com/hellofresh/health-go/v5/checks/rabbitmq"
 	checkRedis "github.com/hellofresh/health-go/v5/checks/redis"
-	"github.com/knadh/koanf/parsers/yaml"
-	"github.com/knadh/koanf/providers/env"
-	"github.com/knadh/koanf/providers/file"
-	"github.com/knadh/koanf/providers/structs"
-	"github.com/knadh/koanf/v2"
-	checkDNS "gitlab.com/buzzer13/healthpose/checks/dns"
-	checkICMP "gitlab.com/buzzer13/healthpose/checks/icmp"
-	"log"
-	"net/http"
 )
 
 var defaultConfig = Config{
