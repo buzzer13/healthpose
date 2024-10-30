@@ -10,6 +10,10 @@ RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-s -w" -o healthpose h
 
 FROM docker.io/library/alpine:3.20
 
+LABEL org.opencontainers.image.source=https://github.com/buzzer13/healthpose
+LABEL org.opencontainers.image.description="HTTP health check server"
+LABEL org.opencontainers.image.licenses=Apache-2.0
+
 EXPOSE 8080
 
 RUN apk --no-cache add ca-certificates
